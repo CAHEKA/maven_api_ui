@@ -1,3 +1,5 @@
+package test;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -5,6 +7,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.UIProps;
 
 public class BaseTest {
 
@@ -29,7 +32,7 @@ public class BaseTest {
         capabilities.setVersion(config.chromeVersion());
         System.out.println("chromeVersion: " + config.chromeVersion());
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = config.selenoidUrl();
+//        Configuration.remote = config.selenoidUrl();
         System.out.println("selenoidUrl: " + config.selenoidUrl());
     }
 }

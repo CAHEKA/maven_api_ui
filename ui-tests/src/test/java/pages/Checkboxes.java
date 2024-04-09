@@ -17,11 +17,18 @@ public class Checkboxes {
         Selenide.open("https://the-internet.herokuapp.com/checkboxes");
         checkboxes.should(visible, Duration.ofSeconds(30));
     }
+    
+    public CheckboxesAssert check(){
+        return CheckboxesAssert.assertThat(this);
+    }
 
-    public Checkboxes selectCheckbox(String text){
+    public SelenideElement getCheckbox(String text){
         String xpath = String.format(".//input[contains(following-sibling::text(), '%s')]", text);
-        checkboxes.find(By.xpath(xpath)).click();
-        System.out.println("Checked attribute : " + checkboxes.find(By.xpath(xpath)).isSelected());
+        return  checkboxes.find(By.xpath(xpath));
+    }
+    
+    public Checkboxes clickCheckbox(String text){
+        getCheckbox(text).click();
         return this;
     }
 

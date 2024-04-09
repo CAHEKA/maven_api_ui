@@ -17,14 +17,16 @@ public class Dropdown {
         dropdown.should(visible, Duration.ofSeconds(30));
     }
 
+    public DropdownAssert check(){
+        return DropdownAssert.assertThat(this);
+    }
+
     public Dropdown selectDropdownByNum(Integer num) {
         dropdown.selectOptionByValue(String.valueOf(num));
-        printCurrentElementText();
         return this;
     }
-    private Dropdown printCurrentElementText(){
-        System.out.println("Current element text: " + dropdown.getSelectedOption().getText());
-        return this;
+    public String getText(){
+        return dropdown.getSelectedOption().getText();
     }
 
 }

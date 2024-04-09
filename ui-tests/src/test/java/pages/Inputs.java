@@ -2,12 +2,18 @@ package pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+import org.assertj.core.api.AbstractAssert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
 
 import java.time.Duration;
-import java.util.Random;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class Inputs {
 
@@ -18,16 +24,21 @@ public class Inputs {
         inputField.should(visible, Duration.ofSeconds(30));
     }
 
-    public Inputs enterRandomNumber() {
-        String randomNumber = String.valueOf(new Random().nextInt(10000) + 1);
-        inputField.setValue(randomNumber);
-        printCurrentValue();
+    public InputsAssert check(){
+        return InputsAssert.assertThat(this);
+    }
+    
+    @Step("Enter input: {number}")
+    public Inputs enterInput(String number) {
+        inputField.clear();
+        inputField.sendKeys(number);
         return this;
     }
     
-    private Inputs printCurrentValue(){
-        System.out.println("Entered number: " + inputField.getValue());
-        return this;
+    public String getNumber() {
+        return inputField.getValue();
+
     }
-    
+
+
 }

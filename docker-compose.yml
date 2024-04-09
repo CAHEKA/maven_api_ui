@@ -1,0 +1,37 @@
+version: "3.7"
+
+networks:
+  selenoid-net:
+    name: selenoid-net
+
+services:
+  selenoid:
+    container_name: selenoid
+    ports:
+      - 4444:4444
+    image: aerokube/selenoid:latest-release
+    volumes:
+      - "$PWD:/etc/selenoid"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: [
+      "-conf", "/etc/selenoid/browsers.json",
+      "-service-startup-timeout", "3m0s", 
+      "-session-attempt-timeout", "3m0s", 
+      "-session-delete-timeout", "3m0s", 
+      "-timeout", "3m0s",
+      "-limit", "16",
+      "-container-network", "selenoid-net"
+      ]
+    networks:
+      - selenoid-net
+
+  selenoid-ui:
+    container_name: selenoid-ui
+    ports:
+      - 8080:8080
+    image: aerokube/selenoid-ui:latest-release
+    command: [
+      "--selenoid-uri", "http://selenoid:4444"
+      ]
+    networks:
+      - selenoid-net

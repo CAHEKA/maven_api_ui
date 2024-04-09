@@ -32,7 +32,7 @@ public class BaseTest {
         capabilities.setVersion(config.chromeVersion());
         System.out.println("chromeVersion: " + config.chromeVersion());
         Configuration.browserCapabilities = capabilities;
-//        Configuration.remote = config.selenoidUrl();
+        Configuration.remote = config.selenoidUrl();
         System.out.println("selenoidUrl: " + config.selenoidUrl());
     }
 }

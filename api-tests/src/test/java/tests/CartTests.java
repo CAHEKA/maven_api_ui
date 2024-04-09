@@ -7,6 +7,7 @@ import endpoints.CartApi;
 import endpoints.ProductsApi;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class CartTests {
@@ -21,7 +22,7 @@ public class CartTests {
         cartApi = new CartApi(authToken);
     }
     
-
+    @Tag("smoke")
     @Test
     void addProductsToCartTest() {
         Response response = cartApi.addProductsToCart(1,2);

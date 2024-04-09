@@ -1,17 +1,12 @@
 package test;
 
-import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pages.*;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
-import static java.util.Arrays.asList;
 
 
 public class TestUI extends BaseTest {
@@ -39,7 +34,8 @@ public class TestUI extends BaseTest {
                 .check()
                 .isSelected("Option 2");
     }
-
+    
+    @Tag("regression")
     @RepeatedTest(value = 10, name = "Disappearing elements: {currentRepetition} out of {totalRepetitions}")
     public void testDisappearingElements() {
         new DisappearingElements()
@@ -47,6 +43,7 @@ public class TestUI extends BaseTest {
                 .checkNumberOfElements(5);
     }
     
+    @Tag("smoke")
     @ParameterizedTest(name = "Line number {0} has the value: {1}")
     @CsvSource({
             "'-99', '-99'",

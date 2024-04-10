@@ -1,5 +1,6 @@
 package assertions;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.assertj.core.api.AbstractAssert;
 
@@ -12,11 +13,7 @@ public class CartAsserts extends AbstractAssert<CartAsserts, Response> {
         return new CartAsserts(actual);
     }
     
-    public CartAsserts isGreaterThanOrEqualTo(Integer num) {
-        BasicAssert.assertThat(actual).isGreaterThanOrEqualTo(num);
-
-        return this;
-    }
+    @Step("check massage {massage}")
     public CartAsserts checkMassage(String massage) {
         BasicAssert.assertThat(actual).containsMassageInResponse(massage);
 

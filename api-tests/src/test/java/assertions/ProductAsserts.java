@@ -1,4 +1,5 @@
 package assertions;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.assertj.core.api.AbstractAssert;
 
@@ -12,7 +13,8 @@ public class ProductAsserts extends AbstractAssert<ProductAsserts, Response> {
         return new ProductAsserts(actual);
     }
 
-    public ProductAsserts verifyProductResponse(String category, Double discount, int id, String name, Double price) {
+    @Step("verify product")
+    public ProductAsserts verifyProduct(String category, Double discount, int id, String name, Double price) {
         BasicAssert.assertThat(actual)
                 .statusCodeEqual(200)
                 .fieldEqual("category", category)

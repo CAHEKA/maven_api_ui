@@ -5,6 +5,7 @@ import endpoints.AuthApi;
 import endpoints.ProductsApi;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class ProductsTests {
@@ -23,7 +24,7 @@ public class ProductsTests {
     void verifyProductTest() {
         Response response = productsApi.getProductById(1);
         ProductAsserts.assertThat(response)
-                .verifyProductResponse(
+                .verifyProduct(
                         "Electronics",
                         10.0,
                         1,
@@ -32,6 +33,7 @@ public class ProductsTests {
     }
 
     @Test
+    @Tag("smoke")
     void isGreaterThanOrEqualProductsTest() {
         Response response = productsApi.getAllProducts();
         ProductAsserts.assertThat(response)

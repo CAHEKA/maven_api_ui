@@ -1,8 +1,9 @@
-package pages;
+package assertions;
 
 import io.qameta.allure.Step;
 import org.assertj.core.api.AbstractAssert;
 import org.junit.Assert;
+import pages.Checkboxes;
 
 
 public class CheckboxesAssert extends AbstractAssert<CheckboxesAssert, Checkboxes> {

@@ -1,15 +1,9 @@
-package pages;
+package assertions;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.assertj.core.api.AbstractAssert;
 import org.junit.Assert;
-
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
+import pages.Dropdown;
 
 public class DropdownAssert extends AbstractAssert<DropdownAssert, Dropdown> {
 

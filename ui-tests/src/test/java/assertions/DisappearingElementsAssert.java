@@ -1,16 +1,9 @@
-package pages;
+package assertions;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.assertj.core.api.AbstractAssert;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
+import pages.DisappearingElements;
 
 public class DisappearingElementsAssert extends AbstractAssert<DisappearingElementsAssert, DisappearingElements> {
 

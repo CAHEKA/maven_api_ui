@@ -1,12 +1,12 @@
 package test;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pages.*;
-
 
 
 public class TestUI extends BaseTest {
@@ -34,7 +34,7 @@ public class TestUI extends BaseTest {
                 .check()
                 .isSelected("Option 2");
     }
-    
+
     @Tag("regression")
     @RepeatedTest(value = 10, name = "Disappearing elements: {currentRepetition} out of {totalRepetitions}")
     public void testDisappearingElements() {
@@ -42,7 +42,7 @@ public class TestUI extends BaseTest {
                 .check()
                 .checkNumberOfElements(5);
     }
-    
+
     @Tag("smoke")
     @ParameterizedTest(name = "Line number {0} has the value: {1}")
     @CsvSource({
@@ -53,7 +53,7 @@ public class TestUI extends BaseTest {
             "'9e+18', '9e+18'",
             "'abc', ''",
             "'!@#', ''",
-            "'' 123'', '123'",
+            "' 123', '123'",
             "'456 ', '456'",
             "'1q', '1'"
     })
@@ -63,5 +63,5 @@ public class TestUI extends BaseTest {
                 .check()
                 .checkValidNumber(expect);
     }
-    
+
 }

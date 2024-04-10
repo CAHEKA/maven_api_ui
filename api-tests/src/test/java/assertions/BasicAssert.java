@@ -25,9 +25,9 @@ public class BasicAssert extends AbstractAssert<BasicAssert, Response> {
 
     public BasicAssert containsMassageInResponse(String massage) {
         Assertions.assertThat(actual.then().extract().as(Мessage.class).getMessage())
-                .as("Field " + massage + " is not massage in the response")
+                .as(massage + " is not massage in the response")
                 .isEqualTo(massage);
-        
+
         return this;
     }
 
@@ -41,29 +41,33 @@ public class BasicAssert extends AbstractAssert<BasicAssert, Response> {
 
     public BasicAssert fieldEqual(String field, String expectedValue) {
         Assertions.assertThat(actual.jsonPath().getString(field))
-                .as("Field " + field + " is not equal to '%s'", expectedValue)
+                .as("Field '%s' is not equal to '%s'" , field, expectedValue)
                 .isEqualTo(expectedValue);
 
         return this;
     }
 
-    public BasicAssert fieldEqual(String fieldPath, int expectedValue) {
-        Assertions.assertThat(actual.jsonPath().getInt(fieldPath))
-                .as("Field " + fieldPath + " is not equal to '%d'", expectedValue)
+    public BasicAssert fieldEqual(String field, int expectedValue) {
+        Assertions.assertThat(actual.jsonPath().getInt(field))
+                .as("Field '%s' is not equal to '%d'", field, expectedValue)
                 .isEqualTo(expectedValue);
 
         return this;
     }
 
-    public BasicAssert fieldEqual(String fieldPath, Double expectedValue) {
-        Assertions.assertThat(actual.jsonPath().getDouble(fieldPath))
-                .as("Field " + fieldPath + " is not equal to '%d'", expectedValue)
+    public BasicAssert fieldEqual(String field, Double expectedValue) {
+        Assertions.assertThat(actual.jsonPath().getDouble(field))
+                .as("Field '%s' is not equal to '%d'", field, expectedValue)
                 .isEqualTo(expectedValue);
 
         return this;
     }
 
-    public void isGreaterThanOrEqualTo(int num) {
-        Assertions.assertThat(actual.jsonPath().getList("$").size()).isGreaterThanOrEqualTo(num);
+    public BasicAssert isGreaterThanOrEqualTo(int num) {
+        Assertions.assertThat(actual.jsonPath().getList("$").size())
+                .as("")
+                .isGreaterThanOrEqualTo(num);
+
+        return this;
     }
 }

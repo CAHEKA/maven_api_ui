@@ -1,5 +1,6 @@
 package pages;
 
+import assertions.CheckboxesAssert;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;

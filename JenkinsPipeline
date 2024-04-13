@@ -1,0 +1,66 @@
+
+pipeline {
+    agent any
+    
+    tools {
+    maven "3.9.6"
+    }
+    
+    options {
+        disableConcurrentBuilds()
+    }
+    
+    parameters {
+        string(name: 'Tag', description: 'smoke, regression')
+        choice(name: 'chromeVersion', choices: ['123.0', '120.0'], description: 'chromeVersion')
+
+    }
+    
+    stages {
+        stage('Prepare') {
+          agent any
+          steps {
+            git 'https://github.com/CAHEKA/maven_api_ui.git'
+          }
+        }
+        stage('RunTests') {
+            agent any
+            steps {
+                script {
+                    sh 'export CHROME_VERSION=${chromeVersion}'
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                        if (params.Tag) {
+                            println "Run Tag tests"
+                            sh '''
+                            cd ./ui-tests
+                            mvn clean test -Dgroups="${Tag}"
+                            '''
+                        } else {
+                            println "Run all tests"
+                            sh '''
+                            cd ./ui-tests
+                            mvn clean test
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+        stage('Report') {
+            agent any
+            steps {
+                script {
+                    println "Report"
+                }
+            }
+            post {
+                always {
+                    allure includeProperties:
+                     false,
+                     jdk: '',
+                     results: [[path: 'ui-tests/target/allure-results']]
+                }
+            }
+        }
+    }
+}
